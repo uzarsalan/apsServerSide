@@ -1,0 +1,34 @@
+{
+  "rest": {
+    "connector": "rest",
+    "debug": "false",
+    "operations": [
+      {
+        "template": {
+          "method": "POST",
+          "url": "https://api2.appsflyer.com/inappevent/{app_id}",
+          "headers": {
+            "accepts": "application/json",
+            "content-type": "application/json",
+            "authentication": "{authentication}"
+          },
+          "body": {
+            "appsflyer_id": "{appsflyer_id}",
+            "eventName": "{eventName}",
+            "eventValue": "{eventValue}",
+            "af_events_api": "true"
+          }
+        },
+        "functions": {
+          "postEvent": [
+            "app_id",
+            "authentication",
+            "appsflyer_id",
+            "eventName",
+            "eventValue"
+          ]
+        }
+      }
+    ]
+  }
+}
