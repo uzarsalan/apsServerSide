@@ -1,13 +1,16 @@
 "use strict";
 
-if (!process.env.APP_ID) throw new Error("No APP_ID env variable");
-if (!process.env.AUTH) throw new Error("No AUTH env variable");
-
 module.exports = function(Postback) {
-  Postback.greet = async function(appsflyer_id, eventName, eventValue, cb) {
+  Postback.greet = async function(
+    app_id,
+    authentication,
+    appsflyer_id,
+    eventName,
+    eventValue
+  ) {
     return Postback.app.models.Rest.postEvent(
-      process.env.APP_ID,
-      process.env.AUTH,
+      app_id,
+      authentication,
       appsflyer_id,
       eventName,
       eventValue
@@ -16,6 +19,16 @@ module.exports = function(Postback) {
 
   Postback.remoteMethod("greet", {
     accepts: [
+      {
+        arg: "app_id",
+        type: "string",
+        http: { source: "query" }
+      },
+      {
+        arg: "authentication",
+        type: "string",
+        http: { source: "query" }
+      },
       {
         arg: "appsflyer_id",
         type: "string",
